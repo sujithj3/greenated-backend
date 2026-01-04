@@ -24,8 +24,8 @@ public interface FarmerMapper {
 
 
 	@Mapping(source = "user.userId", target = "userId")
-	@Mapping(source="state.stateId",target="stateId")
-	@Mapping(source="country.countryId",target="countryId")
+	@Mapping(source = "country", target = "country")
+    @Mapping(source = "state", target = "state")
 	FarmerResponseDto toDto(Farmer farmer);
 
 	List<FarmerResponseDto> toDtoList(List<Farmer> farmers);

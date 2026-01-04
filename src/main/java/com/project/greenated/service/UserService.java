@@ -13,7 +13,7 @@ public interface UserService {
 	
 	 public UsersDto createUser(UsersDto dto);
 	 
-	 public List<UsersDto> getUsersByParent(Integer parentId);
+	 public List<UsersDto> getUsersByParentAndRoleName(Integer parentId,String roleName);
 	 
 	 public List<UsersDto> getRootUsers();
 }

@@ -24,7 +24,7 @@ public class WebSecurityConfig {
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.csrf(csrf -> csrf.disable())
 				.authorizeHttpRequests(auth -> auth
-						.requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/api/auth/login",
+						.requestMatchers("/swagger-ui/**", "/v3/api-docs/**", "/api/auth/**",
 								"/api/farmers/**","/edit/**","/api/farmer-land/**")
 						.permitAll().requestMatchers("/save/category/**","/edit/category/**").hasAuthority("CATEGORY_EDIT")
 						.requestMatchers("/save/category/**").hasAuthority("CATEGORY_EDIT").anyRequest()

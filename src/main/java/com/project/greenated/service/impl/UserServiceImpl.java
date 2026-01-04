@@ -11,7 +11,9 @@ import com.project.greenated.dto.PermissionsDto;
 import com.project.greenated.dto.UsersDto;
 import com.project.greenated.mapper.UserMapper;
 import com.project.greenated.model.RolePermissions;
+import com.project.greenated.model.Roles;
 import com.project.greenated.model.Users;
+import com.project.greenated.repository.RolesRepository;
 import com.project.greenated.repository.UsersRepository;
 import com.project.greenated.service.UserService;
 
@@ -22,6 +24,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserMapper userMapper;
+	
+	@Autowired
+	private RolesRepository rolerepository;
 
 	@Override
 	public Users findByUsername(String username) {
@@ -57,23 +62,31 @@ public class UserServiceImpl implements UserService {
 		}
 		return response;
 	}
-	 @Override
-	 public UsersDto createUser(UsersDto dto) {
+	@Override
+	public UsersDto createUser(UsersDto dto) {
 
-	        Users user = userMapper.toEntity(dto);
+	    Users user = userMapper.toEntity(dto);
 
-	        if (dto.getParentId() != null) {
-	            Users parent = usersRepository.findById(dto.getParentId())
-	                    .orElseThrow(() -> new RuntimeException("Parent user not found"));
-	            user.setParent(parent);
-	        }
+	    /* ================= ROLE ================= */
+	    Roles role = rolerepository.findById(dto.getRoleId())
+	            .orElseThrow(() -> new RuntimeException("Role not found"));
+	    user.setRoles(role);
 
-	        return userMapper.toDto(usersRepository.save(user));
+	    /* ================= PARENT USER ================= */
+	    if (dto.getParentId() != null) {
+	        Users parent = usersRepository.findById(dto.getParentId())
+	                .orElseThrow(() -> new RuntimeException("Parent user not found"));
+	        user.setParent(parent);
 	    }
+
+	   
+	    Users savedUser = usersRepository.save(user);
+	    return userMapper.toDto(savedUser);
+	}
 	 @Override
-	    public List<UsersDto> getUsersByParent(Integer parentId) {
+	    public List<UsersDto> getUsersByParentAndRoleName(Integer parentId,String roleName) {
 	        return userMapper.toDtoList(
-	                usersRepository.findByParent_UserId(parentId)
+	                usersRepository.findUsersByParentAndRoleName(parentId,roleName)
 	        );
 	    }
 	 @Override

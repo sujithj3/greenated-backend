@@ -12,13 +12,14 @@ import com.project.greenated.model.Users;
 @Mapper(componentModel = "spring")
 public interface UserMapper {
 
-    @Mapping(source = "parent.userId", target = "parentId")
-    UsersDto toDto(Users user);
-
-    
+	@Mapping(target = "roles", ignore = true)
     @Mapping(target = "parent", ignore = true)
     Users toEntity(UsersDto dto);
 
+    @Mapping(source = "roles.roleId", target = "roleId")
+    @Mapping(source = "parent.userId", target = "parentId")
+    UsersDto toDto(Users user);
+    
     List<UsersDto> toDtoList(List<Users> users);
 
     @Mapping(target = "parent", ignore = true)

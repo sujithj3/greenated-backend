@@ -83,10 +83,10 @@ public class AuthController {
         }
     }
 
-	@RequestMapping(value = "/by-parent/{parentId}", method = RequestMethod.GET)
-	public ResponseDto getUsersByParent(@PathVariable Integer parentId) {
+	@RequestMapping(value = "/by-parent/{parentId}/{roleName}", method = RequestMethod.GET)
+	public ResponseDto getUsersByParentAndRole(@PathVariable Integer parentId,@PathVariable String roleName) {
 		try {
-			return new ResponseDto(false, successCode, successMsg, userService.getUsersByParent(parentId));
+			return new ResponseDto(false, successCode, successMsg, userService.getUsersByParentAndRoleName(parentId,roleName));
 		} catch (Exception e) {
 			return new ResponseDto(true, serviceErrorCode, serviceErrorMsg, serviceErrorMsg);
 		}
