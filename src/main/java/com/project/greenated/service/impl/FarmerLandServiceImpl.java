@@ -102,4 +102,15 @@ public class FarmerLandServiceImpl implements FarmerLandService {
 
         return farmerLandMapper.toDtoList(lands);
     }
+    
+    @Override
+    @Transactional
+    public void deleteProjectById(Integer landId) {
+
+        if (!farmerLandRepository.existsByLandId(landId)) {
+            throw new RuntimeException("Project not found with id: " + landId);
+        }
+
+        farmerLandRepository.deleteById(landId);
+    }
 }

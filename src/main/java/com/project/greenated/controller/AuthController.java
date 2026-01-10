@@ -4,11 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.greenated.dto.LoginDto;
@@ -73,17 +73,17 @@ public class AuthController {
 		}			
 	}
 	
-	@RequestMapping(value = "/create", method = RequestMethod.POST)
+	@PostMapping("/create")
     public ResponseDto createUser(@RequestBody UsersDto usersDto) {
         try {
             UsersDto user = userService.createUser(usersDto);
             return new ResponseDto(false, successCode, successMsg, user);
         } catch (Exception e) {
-            return new ResponseDto(true, serviceErrorCode, serviceErrorMsg, serviceErrorMsg);
+            return new ResponseDto(true, serviceErrorCode, serviceErrorMsg, e.getMessage());
         }
     }
 
-	@RequestMapping(value = "/by-parent/{parentId}/{roleName}", method = RequestMethod.GET)
+	@GetMapping("/by-parent/{parentId}/{roleName}")
 	public ResponseDto getUsersByParentAndRole(@PathVariable Integer parentId,@PathVariable String roleName) {
 		try {
 			return new ResponseDto(false, successCode, successMsg, userService.getUsersByParentAndRoleName(parentId,roleName));
@@ -92,7 +92,7 @@ public class AuthController {
 		}
 	}
 
-	@RequestMapping(value = "/root", method = RequestMethod.GET)
+	@GetMapping("/root")
 	public ResponseDto getRootUsers() {
 		try {
 			return new ResponseDto(false, successCode, successMsg, userService.getRootUsers());

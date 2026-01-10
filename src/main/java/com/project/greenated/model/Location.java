@@ -33,7 +33,7 @@ public class Location {
 	    /* ===== STATE (only for DISTRICT level) ===== */
 	    @ManyToOne(fetch = FetchType.LAZY)
 	    @JoinColumn(name = "state_id")
-	    private States states;
+	    private States state;
 
 	    /* ===== PARENT LOCATION (Hierarchy) ===== */
 	    @ManyToOne(fetch = FetchType.LAZY)

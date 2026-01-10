@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.greenated.dto.AddressDto;
+import com.project.greenated.dto.LocationAddressDto;
 import com.project.greenated.repository.CountryRepository;
+import com.project.greenated.repository.LocationRepository;
 import com.project.greenated.repository.StateRepository;
 import com.project.greenated.service.LocationService;
 
@@ -17,6 +19,9 @@ public class LocationServiceImpl implements LocationService{
 	
 	@Autowired
 	private StateRepository stateRepo;
+	
+	@Autowired
+	private LocationRepository locationRepo;
 	
 	
 	
@@ -29,10 +34,18 @@ public class LocationServiceImpl implements LocationService{
 	    }
 
 	    @Override
-	    public List<AddressDto> getStatesByCountry(Long countryId) {
+	    public List<AddressDto> getStatesByCountry(Integer countryId) {
 	        return stateRepo.findByCountry_CountryId(countryId)
 	                .stream()
 	                .map(s -> new AddressDto(s.getStateId(), s.getStateName()))
+	                .toList();
+	    }
+	    
+	    @Override
+	    public List<LocationAddressDto> getDistrictByState(Integer stateId) {
+	        return locationRepo.findByState_StateId(stateId)
+	                .stream()
+	                .map(s -> new LocationAddressDto(s.getId(), s.getName()))
 	                .toList();
 	    }
 

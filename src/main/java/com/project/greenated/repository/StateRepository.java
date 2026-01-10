@@ -10,6 +10,6 @@ import com.project.greenated.model.States;
 @Repository
 public interface StateRepository extends JpaRepository<States, Integer> {
 	
-	List<States> findByCountry_CountryId(Long countryId);
+	List<States> findByCountry_CountryId(Integer countryId);
 
 }

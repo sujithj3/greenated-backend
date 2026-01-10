@@ -23,6 +23,7 @@ public class Farmer {
     private Integer farmerId;
 
     private String farmerName;
+    
     private String contactNo;
 
     @ManyToOne

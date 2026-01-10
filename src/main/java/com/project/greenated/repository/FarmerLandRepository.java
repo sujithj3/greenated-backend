@@ -21,5 +21,7 @@ public interface FarmerLandRepository extends JpaRepository<FarmerLand,Integer>{
 		            @Param("userId") Integer userId,
 		            @Param("categoryId") Integer categoryId
 		    );
+	 
+	 boolean existsByLandId(Integer landId);
 
 }

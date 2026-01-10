@@ -13,23 +13,18 @@ import com.project.greenated.model.Farmer;
 @Mapper(componentModel = "spring")
 public interface FarmerMapper {
 
+	@Mapping(source = "countryId", target = "country.countryId")
+	@Mapping(source = "stateId", target = "state.stateId")
 	@Mapping(source = "userId", target = "user.userId")
-	@Mapping(source="stateId",target="state.stateId")
-	@Mapping(source="countryId",target="country.countryId")
 	Farmer toEntity(FarmerRequestDto dto);
 
-
-	
 	void updateEntityFromDto(FarmerRequestDto dto, @MappingTarget Farmer farmer);
 
-
-	@Mapping(source = "user.userId", target = "userId")
 	@Mapping(source = "country", target = "country")
-    @Mapping(source = "state", target = "state")
+	@Mapping(source = "state", target = "state")
+	@Mapping(source = "user.userId", target = "userId")
 	FarmerResponseDto toDto(Farmer farmer);
 
 	List<FarmerResponseDto> toDtoList(List<Farmer> farmers);
 
-
-	
 }
