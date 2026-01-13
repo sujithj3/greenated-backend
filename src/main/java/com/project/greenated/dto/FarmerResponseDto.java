@@ -9,6 +9,6 @@ public class FarmerResponseDto {
     private String farmerName;
     private String contactNo;
     private Integer userId;
-    private Integer stateId;
-    private Integer countryId;
+    private FarmerCountryDto country;
+    private FarmerStateDto state;
 }

@@ -20,7 +20,8 @@ public class FarmerLandResponseDto {
     private Double landArea;
     private String species;
     private LocalDate plantingDate;
-
+    private Double longitude;
+    private Double latitude;
     private FarmerResponseDto farmer;
     private Integer categoryId;
     private Integer userId;

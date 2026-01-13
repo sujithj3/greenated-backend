@@ -16,10 +16,10 @@ public class FarmerLandRequestDto {
     private Integer projectId;
     private String projectName;
     private Double landArea;
+    private Double longitude;
+    private Double latitude;
     private String species;
     private LocalDate plantingDate;
-
-    // REQUIRED
     private Integer farmerId;
     private Integer categoryId;
     private Integer userId;

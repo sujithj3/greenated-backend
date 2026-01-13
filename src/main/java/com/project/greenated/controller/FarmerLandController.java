@@ -3,6 +3,7 @@ package com.project.greenated.controller;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -63,5 +64,18 @@ public class FarmerLandController {
             return new ResponseDto(true, 500, "Failed to fetch land", e.getMessage());
         }
     }
+    
+    @DeleteMapping("/delete/{landId}")
+    public ResponseDto deleteProject(@PathVariable Integer landId) {
+
+        try {
+        	farmerLandService.deleteProjectById(landId);
+            return new ResponseDto(false, -1, "Project deleted successfully", null);
+
+        } catch (Exception e) {
+            return new ResponseDto(true, 500, "Failed to delete project", e.getMessage());
+        }
+    }
+    
 }
 

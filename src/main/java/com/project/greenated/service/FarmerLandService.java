@@ -13,5 +13,7 @@ public interface FarmerLandService {
 
     List<FarmerLandResponseDto> getLandByUserAndCategory(
             Integer userId, Integer categoryId);
+    
+    void deleteProjectById(Integer landId);
 }
 
