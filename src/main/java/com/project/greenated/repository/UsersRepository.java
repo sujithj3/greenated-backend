@@ -16,13 +16,10 @@ public interface UsersRepository extends JpaRepository<Users, Integer> {
 			+ "LEFT JOIN FETCH rp.permission p " + "WHERE u.email = :username AND u.password = :password")
 	List<Users> loadUserDetails(@Param("username") String username, @Param("password") String password);
 
-	@Query(value = """
-			    SELECT u.*
-			    FROM users u
-			    JOIN roles r ON u.role_id = r.role_id
-			    WHERE u.parent_id = :parentId
-			      AND r.role_name = :roleName
-			""", nativeQuery = true)
+	@Query(value = "SELECT u.* FROM users u JOIN roles r ON u.role_id=r.role_id " +
+		            "WHERE (u.parent_id=:parentId OR u.parent_id IN " +
+		            "(SELECT user_id FROM users WHERE parent_id=:parentId)) " +
+		            "AND r.role_name=:roleName", nativeQuery = true)
 	List<Users> findUsersByParentAndRoleName(@Param("parentId") Integer parentId, @Param("roleName") String roleName);
 
 	// Get root users (no parent)
