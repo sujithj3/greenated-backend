@@ -2,7 +2,6 @@ package com.project.greenated.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -20,23 +19,21 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Location {
 
-	 @Id
-	    @GeneratedValue(strategy = GenerationType.IDENTITY)
-	    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-	    @Column(nullable = false)
-	    private String name;      // VELLORE, COIMBATORE
+	@Column(nullable = false)
+	private String name;
 
-	    @Column(nullable = false)
-	    private String type;      // STATE / DISTRICT / CITY
+	@Column(nullable = false)
+	private String type;
 
-	    /* ===== STATE (only for DISTRICT level) ===== */
-	    @ManyToOne(fetch = FetchType.LAZY)
-	    @JoinColumn(name = "state_id")
-	    private States state;
+	@ManyToOne
+	@JoinColumn(name = "state_id")
+	private States state;
 
-	    /* ===== PARENT LOCATION (Hierarchy) ===== */
-	    @ManyToOne(fetch = FetchType.LAZY)
-	    @JoinColumn(name = "parent_id")
-	    private Location parent;
+	@ManyToOne
+	@JoinColumn(name = "parent_id")
+	private Location parent;
 }

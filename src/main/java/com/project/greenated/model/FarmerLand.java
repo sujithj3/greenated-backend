@@ -22,64 +22,62 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class FarmerLand {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "land_id")
-    private Integer landId;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "land_id")
+	private Integer landId;
 
-    @Column(name = "project_id")
-    private Integer projectId;
+	@Column(name = "project_id")
+	private Integer projectId;
 
-    @Column(name = "project_name")
-    private String projectName;
+	@Column(name = "project_name")
+	private String projectName;
 
-    @Column(name = "land_area")
-    private Double landArea;
-    
-    @Column(name = "latitude")
-    private Double latitude;
-    
-    @Column(name = "longitude")
-    private Double longitude;
+	@Column(name = "land_area")
+	private Double landArea;
 
-    @Column(name = "species")
-    private String species;
+	@Column(name = "latitude")
+	private Double latitude;
 
-    @Column(name = "planting_date")
-    private LocalDate plantingDate;
-    
+	@Column(name = "longitude")
+	private Double longitude;
 
+	@Column(name = "species")
+	private String species;
 
-    @ManyToOne
-    @JoinColumn(name = "farmer_id")
-    private Farmer farmer;
+	@Column(name = "planting_date")
+	private LocalDate plantingDate;
 
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    private Categories category;
+	@ManyToOne
+	@JoinColumn(name = "farmer_id")
+	private Farmer farmer;
 
-    @ManyToOne
-    @JoinColumn(name = "country_id")
-    private Countries country;
+	@ManyToOne
+	@JoinColumn(name = "category_id")
+	private Categories category;
 
-    @ManyToOne
-    @JoinColumn(name = "state_id")
-    private States state;
+	@ManyToOne
+	@JoinColumn(name = "country_id")
+	private Countries country;
 
-    @ManyToOne
-    @JoinColumn(name = "district_id")
-    private Location district;
-    
-    @Column(name = "status")
-    private Integer status;
+	@ManyToOne
+	@JoinColumn(name = "state_id")
+	private States state;
 
-    @Column(name = "created_at", updatable = false)
-    private LocalDateTime createdAt;
+	@ManyToOne
+	@JoinColumn(name = "district_id")
+	private Location district;
 
-    @Column(name = "updated_at")
-    private LocalDateTime updatedAt;
-    
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private Users user;
+	@Column(name = "status")
+	private Integer status;
+
+	@Column(name = "created_at", updatable = false)
+	private LocalDateTime createdAt;
+
+	@Column(name = "updated_at")
+	private LocalDateTime updatedAt;
+
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private Users user;
 }

@@ -69,7 +69,7 @@ public class AuthController {
 			user.setToken(token);	
 			return new ResponseDto(false, successCode, successMsg, user);
 		} catch (Exception e) {
-			return new ResponseDto(true, badRequestCode, "Login Failed", "Login Failed");
+			return new ResponseDto(true, badRequestCode, "Login Failed",e.getMessage());
 		}			
 	}
 	
